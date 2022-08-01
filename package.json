@@ -11,7 +11,7 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "migration": "npm run typeorm migration:generate ./src/migrations/update-table -- -d ./src/app/database.ts",
     "reload": "npm run typeorm migration:run -- -d ./src/app/database.ts",
-    "init:data": "cross-env NODE_ENV=INIT ts-node ./src/app/init.ts "
+    "init:db": "cross-env NODE_ENV=INIT ts-node ./src/app/init.ts "
   },
   "types": "index.d.ts",
   "keywords": [],
