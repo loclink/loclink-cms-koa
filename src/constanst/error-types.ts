@@ -3,7 +3,7 @@ import { IErrorTypes } from './types';
 const ERROR_TYPES: IErrorTypes = {
   TOKEN_CHECK_FAILED: {
     code: 10401,
-    message: '无效的token'
+    message: '身份已过期，请重新登录'
   },
   INCORRECT_USERNAME_OR_PASSWORD: {
     code: 10400,
