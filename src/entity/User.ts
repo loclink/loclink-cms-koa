@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToMany, ManyToOne } from 'typeorm';
 import Role from './Role';
 
 @Entity({ name: 'user' })
@@ -20,10 +20,10 @@ export default class User {
   })
   password?: string;
 
-  @OneToOne(() => Role)
+  @ManyToOne(() => Role)
   @JoinColumn({ name: 'role' })
   @Column({ comment: '角色id', default: 1 })
-  role?: Role & number;
+  role?: number & Role;
 
   @Column({
     comment: '上次登录ip地址',

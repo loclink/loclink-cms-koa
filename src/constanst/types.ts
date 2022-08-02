@@ -1,5 +1,5 @@
 // 错误信息类型
-export interface IErrorType {
+export interface IErrorItem {
   code: number | string;
   message: string;
 }
@@ -12,11 +12,12 @@ export interface ISuccessType {
 }
 
 // 错误列表类型
-export interface IErrorTypes {
-  TOKEN_CHECK_FAILED: IErrorType;
-  INCORRECT_USERNAME_OR_PASSWORD: IErrorType;
-  USERNAME_OR_PASSWORD_ILLEGAL: IErrorType;
-  USERNAME_ALREADY_EXISTS: IErrorType;
-  USERNAME_OR_PASSWORD_NOT_FOUND: IErrorType;
-  PARAMETER_ERROR: IErrorType;
+export interface IErrorTypes<T> {
+  TOKEN_CHECK_FAILED: T;
+  INCORRECT_USERNAME_OR_PASSWORD: T;
+  USERNAME_OR_PASSWORD_ILLEGAL: T;
+  USERNAME_ALREADY_EXISTS: T;
+  USERNAME_OR_PASSWORD_NOT_FOUND: T;
+  PARAMETER_ERROR: T;
+  REGISTRATION_CODE_ERROR: T
 }

@@ -30,8 +30,8 @@ export default class Role {
 
   @Column({
     comment: '注册码',
-    default: '',
-    select: false
+    select: false,
+    nullable: true
   })
   sign_up_code?: string;
 

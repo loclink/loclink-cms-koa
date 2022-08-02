@@ -1,6 +1,10 @@
-import { IErrorTypes } from './types';
+import { IErrorTypes, IErrorItem } from './types';
 
-const ERROR_TYPES: IErrorTypes = {
+const ERROR_TYPES: IErrorTypes<IErrorItem> = {
+  REGISTRATION_CODE_ERROR: {
+    code: 10402,
+    message: '注册码错误或已关闭注册通道'
+  },
   TOKEN_CHECK_FAILED: {
     code: 10401,
     message: '身份已过期，请重新登录'
