@@ -1,7 +1,7 @@
 import Router from 'koa-router';
 import { verifyUserExist, verifyParams, verifySignUpCode } from '../middleware/user.middleware';
 import { userSignUp, userInfo, userMenuList, userList } from '../controller/user.controller';
-import { handlePasswordMd5 } from '../middleware/user.middleware';
+import { handlePasswordMd5, verifyUserListParams } from '../middleware/user.middleware';
 import { verifyToken } from '../middleware/auth.middleware';
 
 const userRouter = new Router({ prefix: '/user' });
@@ -16,5 +16,5 @@ userRouter.post('/info', verifyToken, userInfo);
 userRouter.get('/menu', verifyToken, userMenuList);
 
 // 获取用户列表
-userRouter.get('/list', verifyToken, userList);
+userRouter.post('/list', verifyToken, verifyUserListParams, userList);
 export default userRouter;

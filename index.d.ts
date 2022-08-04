@@ -6,7 +6,11 @@ import Menu from './src/entity/Menu';
 import Role from './src/entity/Role';
 import User from './src/entity/User';
 
-type ResultType = Menu & User & Role & BlogMenu & Logs;
+type IPage = {
+  limit?: number;
+  offset?: number;
+};
+type ResultType = Menu & User & Role & BlogMenu & Logs & IPage;
 
 declare module 'koa' {
   interface Request {

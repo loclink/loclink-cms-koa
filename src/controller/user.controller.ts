@@ -33,7 +33,7 @@ const userMenuList = async (ctx: Context) => {
 
 // 用户列表
 const userList = async (ctx: Context) => {
-  const result = await getUserList();
+  const result = await getUserList(ctx.request.body);
   ctx.success('获取用户列表成功', result);
 };
 
