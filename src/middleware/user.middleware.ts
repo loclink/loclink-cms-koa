@@ -33,7 +33,6 @@ const verifySignUpCode = async (ctx: Context, next: Next) => {
 
   // 校验后注册数据携带role_id
   ctx.request.body.role = roleData.id;
-
   await next();
 };
 
@@ -54,15 +53,8 @@ const verifyUserExist = async (ctx: Context, next: Next) => {
   await next();
 };
 
-const verifyUserListParams = async (ctx: Context, next: Next) => {
-  const { limit, offset } = ctx.request.query;
-  ctx.request.body.limit = limit ?? 10;
-  ctx.request.body.offset = offset ?? 0;
-  await next();
-};
 
 export {
-  verifyUserListParams,
   handlePasswordMd5,
   verifyParams,
   verifySignUpCode,
