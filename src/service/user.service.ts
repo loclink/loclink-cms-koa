@@ -48,8 +48,7 @@ const getUserList = async (params: ResultType) => {
     .take(limit)
     .getMany();
 
-  const userRepository = AppDataSource.getRepository(User);
-  const total = await userRepository.countBy(where);
+  const total = await AppDataSource.getRepository(User).countBy(where);
 
   const data = {
     list: result,
