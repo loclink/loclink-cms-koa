@@ -31,13 +31,12 @@ const getMenuListByRoleId = async (roleId) => {
     .select('menu')
     .from(Menu, 'menu')
     .leftJoinAndSelect('menu.children', 'children', `children.id IN (${roleMenuIds})`)
-    .where(`menu.parent_id is null and menu.id IN (:...roleMenuIds)`, {  roleMenuIds })
+    .where(`menu.parent_id is null and menu.id IN (:...roleMenuIds)`, { roleMenuIds })
     .orderBy({
       'menu.sort': 'ASC',
       'children.sort': 'ASC'
     })
     .getMany();
-
   return result;
 };
 

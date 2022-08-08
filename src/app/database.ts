@@ -14,7 +14,7 @@ export const AppDataSource = new DataSource({
   password: config.MYSQL_PASSWORD,
   database: config.MYSQL_DARABASE,
   synchronize: process.env.NODE_ENV === 'INIT' ? true : false,
-  logging: false,
+  logging: true,
   entities: [path.resolve(__dirname, '../entity/*.js'), path.resolve(__dirname, '../entity/*ts')],
   migrations: [path.resolve(__dirname, '../migrations/*.js'), path.resolve(__dirname, '../migrations/*ts')],
   subscribers: [GlobalSubscriber, MenuSubscriber]

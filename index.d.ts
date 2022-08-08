@@ -9,6 +9,7 @@ import User from './src/entity/User';
 type IPage = {
   limit?: number;
   offset?: number;
+  createdRange?: number[];
 };
 type ResultType = Menu & User & Role & BlogMenu & Logs & IPage;
 

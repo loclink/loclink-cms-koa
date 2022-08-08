@@ -1,7 +1,7 @@
 import User from '../entity/User';
 import { AppDataSource } from '../app/database';
 import { ResultType } from '../..';
-import { Like } from 'typeorm';
+import { Between, Like } from 'typeorm';
 
 // 数据库操作使用 QueryBuilder 查询生成器
 // 创建用户
@@ -32,18 +32,23 @@ const updateUserByName = async (username, userInfo) => {
 
 // 获取全部用户列表数据信息
 const getUserList = async (params: ResultType) => {
-  const { offset, limit } = params;
+  const { offset, limit, createdRange } = params;
+  console.log(params);
   const result = await AppDataSource.createQueryBuilder()
     .select('user')
     .from(User, 'user')
     .leftJoinAndSelect('user.role', 'role')
-    .where({ username: Like(`%${params.username ?? ''}%`), role: Like(`%${params.role ?? ''}%`) })
+    .where({ username: Like(`%${params.username ?? ''}%`), role: Like(`%${params.role ?? ''}%`), created:Between(createdRange[0], createdRange[1]) })
     .skip(offset)
     .take(limit)
     .getMany();
 
   const userRepository = AppDataSource.getRepository(User);
-  const total = await userRepository.count();
+  const total = await userRepository.countBy({
+    username: Like(`%${params.username ?? ''}%`),
+    role: Like(`%${params.role ?? ''}%`),
+    created: Between(createdRange[0], createdRange[1])
+  });
   const data = {
     list: result,
     total
