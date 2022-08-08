@@ -33,22 +33,24 @@ const updateUserByName = async (username, userInfo) => {
 // 获取全部用户列表数据信息
 const getUserList = async (params: ResultType) => {
   const { offset, limit, createdRange } = params;
-  console.log(params);
+  const where = {
+    username: Like(`%${params.username ?? ''}%`),
+    role: Like(`%${params.role ?? ''}%`),
+    created: Between(createdRange[0], createdRange[1])
+  };
+
   const result = await AppDataSource.createQueryBuilder()
     .select('user')
     .from(User, 'user')
     .leftJoinAndSelect('user.role', 'role')
-    .where({ username: Like(`%${params.username ?? ''}%`), role: Like(`%${params.role ?? ''}%`), created:Between(createdRange[0], createdRange[1]) })
+    .where(where)
     .skip(offset)
     .take(limit)
     .getMany();
 
   const userRepository = AppDataSource.getRepository(User);
-  const total = await userRepository.countBy({
-    username: Like(`%${params.username ?? ''}%`),
-    role: Like(`%${params.role ?? ''}%`),
-    created: Between(createdRange[0], createdRange[1])
-  });
+  const total = await userRepository.countBy(where);
+
   const data = {
     list: result,
     total
